@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abidh Kareem-Portiflio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/9186e3a454.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="images/logo.png" class="logo">
+                <ul>
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#portifolio">Portifolio</a></li>
+                    <li><a href="#contact">Contact</a></li>
+
+                </ul>
+            </nav>
+            <div class="header-text">
+                <p>Web Designer</p>
+                <h1>Hi, I'm <span>AbidhKareem</span><br> From India</h1>
+            </div>
+        </div>
+    </div>
+    
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="images/about.png">
+                </div>
+                <div class="about-col-1">
+                    <h1 class="sub-title">About Me</h1>
+                    <p>Digital Marketer with expertise in web designing, adept in digital trends, and proficient across multiple social media platforms. Seeking a position in a reputable organization to advance the company and further develop technical skills. Additionally skilled in video editing and experienced in Python.</p>
+
+                        <div class="tab-titles">
+                            <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                            <p class="tab-links"  onclick="opentab('experience')">Experience</p>
+                            <p class="tab-links"  onclick="opentab('education')">Education</p>
+                        </div>
+                        <div class="tab-contents active-tab" id="skills">
+                            <ul>
+                                <li><span>Shopify</span><br>Designing E-commers Website</li>
+                                <li><span>Wix</span><br>Designing Web Interfaces</li>
+                                <li><span>HTML&CSS</span><br>Designing Web Interfaces</li>
+
+                            </ul>
+                        </div>
+                        <div class="tab-contents" id="experience">
+                            <ul>
+                                <li><span>2023</span><br>Digital Marketing Pro & WebDeveloper at Goal10x Technologies PVT.LTD</li>
+                                <li><span>2022</span><br>Odoo Technical Staff at Aishtech </li>
+                                <li><span>2021</span><br>Digital Marketing Exicutive at Sqaud Solutioin</li>
+                            </ul>
+                        </div>
+                        <div class="tab-contents" id="education">
+                            <ul>
+                                <li><span>2020</span><br>Python Full Stack Developer</li>
+                                <li><span>2019</span><br>Bachelor of Computer Application</li>
+                            </ul>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!------------portifolio-------->
+    <div id="portifolio">
+        <div class="container">
+            <h1 class="sub-title">My Work</h1>
+            <div class = "scroll-list">
+                <div class = "scroll-item">
+                </div>
+            
+                <div class = "scroll-item">
+                </div>
+            
+                <div class = "scroll-item">
+                </div>
+            </div>
+            <div class="scroll-headings">
+                <div>
+                    <h2>Goal10x</h2>
+                    <p>Edu-Tech Website using Wix Website Bulider</p>
+                    <a href="#">www.goal10x.com</a>
+                </div>
+                <div>
+                    <h2>QuietEarth</h2>
+                    <p>Beauty Products E-commers Website Using Shopify</p>
+                    <a href="#">quietearth.in</a>
+                </div>
+                <div>
+                    <h2>ShinySleep</h2>
+                    <p>Mattress Products E-commers Website Using Shopify</p>
+                    <a href="#">www.goal10x.com</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- ------------contact-------- -->
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="sub-title">Contact Me</h1>
+                    <p><i class="fas fa-paper-plane"></i> abidhkareem@gmail.com</p>
+                    <p><i class="fas fa-phone-square-alt"></i> +919605244119</p>
+                    <div class="social-icons">
+                        <a href=""><i class="fab fa-facebook"></i></a>
+                        <a href=""><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    <a href="images/Abidh E A.pdf" download class="btn btn2">Download CV</a>
+                </div>
+                <div class="contact-right">
+                    <form name="submit-to-google-sheet">
+                        <input type="text" name="Name" placeholder="Your Name" required>
+                        <input type="email" name="Email" placeholder="your email" required>
+                        <textarea name="Message"rows="6" placeholder="Your Message"></textarea>
+                        <button type="submit" class="btn btn2">Submit</button>
+                    </form>
+                    <span id="msg"></span>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>copyright © 2023-2024 AbidhKareem. All rights reserved</p>
+        </div>
+    </div>
+    <script>
+
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+
+        function opentab(tabname){
+            for(tablink of tablinks){
+                tablink.classList.remove("active-link");
+            }
+            for(tabcontent of tabcontents){
+                tabcontent.classList.remove("active-tab");
+            }
+            event.currentTarget.classList.add("active-link");
+            document.getElementById(tabname).classList.add("active-tab");
+        }
+        
+    </script>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbznowXGyTSuRrYoOT4UcFgDMkAHmpmVorTnlW1FsNdMaJoVQ8ey-JEnInYVFiZ1vU1Z/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                msg.innerHTML = "Message Sent Successfully"
+                setTimeout(function(){
+                    msg.innerHTML= ""
+                },5000)
+                form.reset()
+            })
+           
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+</body>
+</html>
