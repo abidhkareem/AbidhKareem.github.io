@@ -1,3 +1,55 @@
+/* Floating Icons */
+.floating-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.icon {
+    position: absolute;
+    color: rgba(0, 255, 195, 0.15);
+    font-size: 24px;
+    z-index: 1;
+    animation: float 15s infinite linear;
+    
+}
+
+/* Individual icon positions and animations */
+.icon:nth-child(1) { top: 10%; left: 5%; animation-duration: 20s; }
+.icon:nth-child(2) { top: 20%; left: 80%; animation-duration: 25s; }
+.icon:nth-child(3) { top: 60%; left: 10%; animation-duration: 18s; }
+.icon:nth-child(4) { top: 40%; left: 85%; animation-duration: 22s; }
+.icon:nth-child(5) { top: 75%; left: 75%; animation-duration: 17s; }
+.icon:nth-child(6) { top: 15%; left: 60%; animation-duration: 30s; }
+.icon:nth-child(7) { top: 65%; left: 50%; animation-duration: 21s; }
+.icon:nth-child(8) { top: 30%; left: 25%; animation-duration: 19s; }
+.icon:nth-child(9) { top: 55%; left: 90%; animation-duration: 24s; }
+.icon:nth-child(10) { top: 80%; left: 30%; animation-duration: 26s; }
+.icon:nth-child(11) { top: 25%; left: 45%; animation-duration: 23s; }
+.icon:nth-child(12) { top: 50%; left: 70%; animation-duration: 16s; }
+
+/* Animations */
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(5vw, 10vh) rotate(90deg);
+    }
+    50% {
+        transform: translate(10vw, 0) rotate(180deg);
+    }
+    75% {
+        transform: translate(5vw, -10vh) rotate(270deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(360deg);
+    }
+}
 *{
     margin: 0;
     padding: 0;
@@ -23,6 +75,7 @@ body{
     padding: 10px 10%;
     
 }
+ 
 nav{
     display:flex ;
     align-items: center;
@@ -358,7 +411,7 @@ body{
 }
 .portfolio-work-list div{
     /* background: #262626; */
-    background-image: linear-gradient(180deg,rgb(28, 220, 232) 0%,#ff004f 0%,#000 100%);
+    background-image: linear-gradient(180deg,rgb(28, 220, 232) 0%, #ff004f 0%,#000 100%);
     padding: 40px;
     font-size: 13px;
     font-weight: 300;
