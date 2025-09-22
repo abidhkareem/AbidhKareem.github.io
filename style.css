@@ -231,25 +231,65 @@ nav ul li a:hover::after{
 .tab-contents.active-tab{
     display:block;
 }
-/* services */
-#services{
-    padding: 30px;
-
+    /* services */
+#services {
+    padding: 50px 30px;
+    background: #000000; /* light background to make cards pop */
+    font-family: 'Poppins', sans-serif;
 }
-.services-list{
+
+.services-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: 40px;
+    gap: 40px;
     margin-top: 50px;
 }
-.services-list div{
-    /* background: #262626; */
-    background-image: linear-gradient(90deg,#000 0%,#ff004f 0%,#000 100%);
-    padding: 40px;
-    font-size: 13px;
-    font-weight: 300;
-    border-radius: 10px;
+
+.services-list div {
+    background: linear-gradient(135deg, #ff004f, #000);
+    color: #fff;
+    padding: 40px 30px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
+
+.services-list div:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    background: linear-gradient(135deg, #ff4f7f, #000);
+}
+
+.services-list div h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.services-list div p {
+    line-height: 1.6;
+}
+
+/* Optional: icon inside service card */
+.services-list div i {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #ffffff;
+    background: rgba(255,255,255,0.2);
+    padding: 15px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.services-list div:hover i {
+    transform: scale(1.1);
+}
+
 
 
 
@@ -403,19 +443,58 @@ body{
     margin: 3rem 0;
     color: #ababab;
 }
-.portfolio-work-list{
+.portfolio-work-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: 40px;
+    gap: 40px;
     margin-top: 50px;
 }
-.portfolio-work-list div{
-    /* background: #262626; */
-    background-image: linear-gradient(180deg,rgb(28, 220, 232) 0%, #ff004f 0%,#000 100%);
+
+.portfolio-work-list div {
+    background-image: linear-gradient(180deg, rgb(28, 220, 232) 0%, #ff004f 0%, #000 100%);
     padding: 40px;
     font-size: 13px;
     font-weight: 300;
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Hover Animation */
+.portfolio-work-list div:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    filter: brightness(1.1);
+}
+
+/* Optional: glowing border effect */
+.portfolio-work-list div::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(60deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+    transform: rotate(0deg);
+    transition: transform 0.6s ease;
+}
+
+.portfolio-work-list div:hover::after {
+    transform: rotate(180deg);
+}
+
+/* Optional: overlay text effect */
+.portfolio-work-list div p {
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.portfolio-work-list div:hover p {
+    transform: translateY(-5px);
+    opacity: 0.95;
 }
 
 
