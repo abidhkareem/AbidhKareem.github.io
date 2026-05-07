@@ -1,3 +1,8 @@
+body{
+    background: linear-gradient(135deg, #2d0075, #7b2cff, #ff007f);
+    color: white;
+    font-family: 'Poppins', sans-serif;
+}
 /* Floating Icons */
 .floating-icons {
     position: absolute;
