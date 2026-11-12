@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Abidh Kareem – Odoo Functional &amp; Support Specialist, Dubai</title>
-<meta name="description" content="Odoo functional and support specialist in Dubai. Procurement, inventory, accounting, POS, multi-company and Odoo.sh.">
+<title>Abidh Kareem – Odoo ERP Support Specialist, Dubai</title>
+<meta name="description" content="ERP support specialist in Dubai. Supports all Odoo modules and departments, monitors the system and reports monthly to management.">
 <link rel="icon" href="images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +30,8 @@ header .wrap{display:flex;align-items:center;gap:24px;height:56px}
 .grid-ico i{background:#fff;border-radius:1px}
 nav{margin-left:auto;display:flex;gap:22px;font-size:15px}
 nav a{text-decoration:none;opacity:.85}nav a:hover{opacity:1;text-decoration:underline}
-@media(max-width:640px){nav a:nth-child(n+4){display:none}}
+nav a,.brand{white-space:nowrap}
+@media(max-width:640px){nav{gap:16px}nav a:nth-child(n+3){display:none}}
 /* hero */
 .hero{background:var(--paper);border-bottom:1px solid var(--line);padding:64px 0}
 .hero .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center}
@@ -40,14 +41,15 @@ nav a{text-decoration:none;opacity:.85}nav a:hover{opacity:1;text-decoration:und
 .btn{display:inline-block;padding:12px 22px;border-radius:6px;font-weight:600;text-decoration:none;border:2px solid var(--plum);background:var(--plum);color:#fff}
 .btn.alt{background:none;color:var(--plum)}
 .btn:hover{background:var(--plum-d);border-color:var(--plum-d);color:#fff}
-.photo{position:relative;height:420px;overflow:hidden;background:var(--plum);border-radius:10px}
-.photo img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:150%;max-width:none}
-.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:44px;border-top:1px solid var(--line)}
+.photo{position:relative;height:460px;overflow:hidden;background:var(--plum);border-radius:10px}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.hero .wrap.facts{display:grid;align-items:start;grid-template-columns:repeat(4,1fr);gap:0;margin-top:44px;padding-top:0;border-top:0}
+.facts div{border-top:1px solid var(--line)}
 .facts div{padding:18px 18px 0 0;font-size:15px;color:var(--mute)}
 .facts b{display:block;color:var(--ink);font-size:16px}
-@media(max-width:820px){.hero .wrap{grid-template-columns:1fr}.photo{height:340px;order:-1}.facts{grid-template-columns:1fr 1fr}}
+@media(max-width:820px){.hero .wrap{grid-template-columns:1fr}.photo{height:340px;order:-1}.hero .wrap.facts{grid-template-columns:1fr 1fr}}
 /* process explorer */
-.tabs{display:flex;gap:8px;margin-bottom:20px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
 .tabs button{font:600 15px 'Public Sans',sans-serif;padding:9px 18px;border-radius:999px;border:1.5px solid var(--plum);background:none;color:var(--plum);cursor:pointer}
 .tabs button[aria-selected=true]{background:var(--plum);color:#fff}
 .stages{display:flex;list-style:none;padding:0;margin:0}
@@ -104,24 +106,25 @@ footer{background:#1d141b;color:#9d909a;font-size:14px;padding:18px 0;text-align
 <div class="hero"><div class="wrap">
 <div>
 <h1>I keep Odoo running for the people who run the business.</h1>
-<p>Odoo functional and support specialist in Dubai. I work across procurement, inventory, accounting, manufacturing and POS, and I handle builds, staging and backups on Odoo.sh. I currently support multi-company Odoo for Alrais Holding.</p>
+<p>ERP support specialist in Dubai. I support every department across all Odoo modules, monitor the system daily, handle builds and backups on Odoo.sh, and give management a monthly report. I currently support multi-company Odoo at Alrais Holding.</p>
 <div class="btns"><a class="btn" href="images/Abidh_Kareem_Odoo_2026.pdf" download>Download CV</a><a class="btn alt" href="#contact">Get in touch</a></div>
 </div>
-<div class="photo"><img src="images/abidh-profile.jpg" alt="Portrait of Abidh Kareem"></div>
+<div class="photo"><img src="images/abidh-profile.jpg" alt="Portrait of Abidh Kareem" width="700" height="803"></div>
 </div>
 <div class="wrap facts">
 <div><b>Odoo Assistant</b>Alrais Holding, Dubai</div>
 <div><b>150+ users trained</b>Inventory, HR, Payroll, Accounting</div>
 <div><b>100+ technicians trained</b>on an Odoo-based mobile app</div>
-<div><b>Odoo.sh</b>Branches, builds, logs, backups</div>
+<div><b>Monthly reports</b>to management on issues and system health</div>
 </div></div>
 
 <section id="process"><div class="wrap">
-<h2>How I work through an Odoo process</h2>
-<p class="lede">Most support tickets sit at the handoff between two apps. Pick a flow and a step to see what I handle there and what usually goes wrong.</p>
+<h2>How I support Odoo across the company</h2>
+<p class="lede">I am the point of contact for every department on every module. Choose a view and click a step to see how I handle requests, support each team and report to management.</p>
 <div class="tabs" role="tablist" aria-label="Choose a flow">
-<button role="tab" id="t0" aria-selected="true" data-f="0">Purchase to payment</button>
-<button role="tab" id="t1" aria-selected="false" data-f="1">Odoo.sh release</button>
+<button role="tab" aria-selected="true" data-f="0">Support workflow</button>
+<button role="tab" aria-selected="false" data-f="1">By department</button>
+<button role="tab" aria-selected="false" data-f="2">Odoo.sh release</button>
 </div>
 <ol class="stages" id="stages"></ol>
 <div class="detail" id="detail" aria-live="polite"></div>
@@ -138,7 +141,8 @@ footer{background:#1d141b;color:#9d909a;font-size:14px;padding:18px 0;text-align
 <p class="lede">Odoo and ERP roles, newest first.</p>
 <div class="job"><div class="when">Dec 2025 to present<br>Dubai, UAE</div><div>
 <h3>Odoo Assistant <span>Alrais Holding</span></h3>
-<ul><li>Monitor daily ERP operations and support users across procurement, inventory and accounting.</li>
+<ul><li>Support all departments across all Odoo modules, and monitor daily ERP operations.</li>
+<li>Give management a monthly report on support activity and system health.</li>
 <li>Manage multi-company setups, including intercompany transactions and inventory transfers.</li>
 <li>Support POS across multiple restaurant and hospitality branches.</li>
 <li>Work on Odoo.sh: branch management, staging-to-production deployments, module customization, and monitoring builds, logs and backups.</li></ul></div></div>
@@ -180,21 +184,29 @@ footer{background:#1d141b;color:#9d909a;font-size:14px;padding:18px 0;text-align
 
 <script>
 const FLOWS=[
-[["Request quote","Purchase","Create RFQs from vendor and product setup, and make sure units of measure, prices and taxes are correct.","Wrong UoM, missing vendor prices, RFQs not reaching the vendor."],
-["Confirm order","Purchase","Confirm POs, follow approval rules, and handle multi-company and intercompany orders.","Orders stuck waiting for approval, wrong company or warehouse on the order."],
-["Receive goods","Inventory","Process receipts, partial deliveries and backorders, and keep stock levels and transfers accurate.","Stock not updating, wrong route or location, unexpected negative stock."],
-["Vendor bill","Accounting","Create bills from received quantities and check taxes, accounts and journals.","Bill quantities not matching receipts, wrong tax or expense account."],
-["Pay","Accounting","Register payments and support users with reconciliation.","Unreconciled lines, payments posted to the wrong journal."]],
-[["Branch","Odoo.sh","Work in a development branch so production is never touched while building or fixing.","Branches out of date with production, missing module dependencies."],
+{h:["What I do","The goal"],s:[
+["Receive","All departments","Take requests from any department by message, call or email, and note what the user was doing and what went wrong.","A clear ticket with the user, module, steps and screenshot, so nothing is lost."],
+["Diagnose","Odoo","Reproduce the issue, then check access rights, configuration, the data involved and the logs.","Find out whether it is a user question, a setup issue, bad data or a bug."],
+["Resolve","Odoo","Fix configuration and data issues, explain the steps to the user, and pass real bugs to developers with clear details.","The user can carry on working and knows how to avoid the problem next time."],
+["Monitor","Odoo.sh","Check daily operations, builds, logs and backups, and watch for errors that keep coming back.","Spot problems before users report them."],
+["Report","Management","Prepare a monthly report for management: requests handled, modules and departments involved, repeat issues and system health.","Management sees how the system is performing and where to improve."]]},
+{h:["What I support","Typical requests"],s:[
+["Procurement","Purchase","Purchase orders, vendor bills and approvals for the procurement team.","Orders waiting for approval, wrong units or taxes, bills that do not match the order."],
+["Inventory","Inventory","Stock levels, receipts, internal and intercompany transfers, and warehouse operations.","Stock not matching, receipts or transfers stuck, wrong location or warehouse."],
+["Accounting","Accounting","Invoices, vendor bills, payments and journals, and questions about accounting entries.","Wrong tax or account, unreconciled payments, invoice or bill errors."],
+["Manufacturing","Manufacturing","Production orders, bills of materials and component consumption.","Production order not starting, components not reserved, wrong quantities used."],
+["POS","Point of Sale","POS sessions and users across restaurant and hospitality branches.","Session will not open or close, items or prices missing at a branch, sync problems."]]},
+{h:["What I do","What I watch for"],s:[
+["Branch","Odoo.sh","Work in a development branch so production is never touched while building or fixing.","Branches out of date with production, missing module dependencies."],
 ["Build","Odoo.sh","Check each build and read the logs for install, update or Python errors.","Failed builds from view or field changes, errors only visible in the logs."],
 ["Test on staging","Odoo.sh","Run the change on staging with a copy of production data and test it with real user flows.","Works on dev data but fails with real data or access rights."],
 ["Release","Odoo.sh","Merge to production in a planned window, after confirming a recent backup exists.","Releasing without a fresh backup, changes landing during working hours."],
-["Monitor","Odoo.sh","Watch production logs and backups after release, and help users with anything unexpected.","Slow views, cron or mail problems that appear only after release."]]];
-const APPS=[["Purchase","RFQs, purchase orders, vendor management and approvals."],["Inventory","Stock management, receipts, transfers and warehouses."],["Accounting","Invoicing, vendor bills and payments."],["Manufacturing","User support for production orders and bills of materials."],["Point of Sale","Support across multiple restaurant and hospitality branches."],["Multi-company","Intercompany transactions and inventory transfers."],["HR & Payroll","Functional support and training at Rons Enviro Care."],["Website","Odoo website development and setup."],["Odoo.sh","Branches, staging, deployments, builds, logs and backups."],["Mobile app","Trained 100+ field technicians on an Odoo-based app."]];
+["Monitor","Odoo.sh","Watch production logs and backups after release, and help users with anything unexpected.","Slow views, cron or mail problems that appear only after release."]]}];
+const APPS=[["Purchase","Support for purchase orders, vendor management and approvals."],["Inventory","Support for stock, receipts, transfers and warehouses."],["Accounting","Support for invoicing, vendor bills and payments."],["Manufacturing","Support for production orders and bills of materials."],["Point of Sale","Support across multiple restaurant and hospitality branches."],["Multi-company","Intercompany transactions and inventory transfers."],["HR & Payroll","Functional support and training at Rons Enviro Care."],["Website","Odoo website development and setup."],["Odoo.sh","Branches, staging, deployments, builds, logs and backups."],["Mobile app","Trained 100+ field technicians on an Odoo-based app."]];
 const COL=["#714B67","#017E84","#E8803A","#5B6FD6","#B5446E"];
 const st=document.getElementById("stages"),dt=document.getElementById("detail");let flow=0,step=0;
-function draw(){st.innerHTML=FLOWS[flow].map((s,i)=>`<li><button aria-selected="${i==step}" data-s="${i}"><span class="dot">${i+1}</span>${s[0]}</button></li>`).join("");
-const s=FLOWS[flow][step];dt.innerHTML=`<h3>${s[0]}<span>${s[1]}</span></h3><div><h4>What I handle</h4><p>${s[2]}</p></div><div><h4>What usually goes wrong</h4><p>${s[3]}</p></div>`}
+function draw(){st.innerHTML=FLOWS[flow].s.map((s,i)=>`<li><button aria-selected="${i==step}" data-s="${i}"><span class="dot">${i+1}</span>${s[0]}</button></li>`).join("");
+const s=FLOWS[flow].s[step],H=FLOWS[flow].h;dt.innerHTML=`<h3>${s[0]}${s[1]!=s[0]?`<span>${s[1]}</span>`:""}</h3><div><h4>${H[0]}</h4><p>${s[2]}</p></div><div><h4>${H[1]}</h4><p>${s[3]}</p></div>`}
 st.addEventListener("click",e=>{const b=e.target.closest("button");if(b){step=+b.dataset.s;draw();st.querySelector(`[data-s="${step}"]`).focus()}});
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{flow=+b.dataset.f;step=0;document.querySelectorAll(".tabs button").forEach(x=>x.setAttribute("aria-selected",x==b));draw()});
 document.getElementById("appgrid").innerHTML=APPS.map((a,i)=>`<div class="app"><div class="ic" style="background:${COL[i%5]}">${a[0].replace(/[^A-Za-z ]/g,"").split(" ").map(w=>w[0]).join("").slice(0,2)}</div><div><h3>${a[0]}</h3><p>${a[1]}</p></div></div>`).join("");
