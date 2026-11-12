@@ -68,7 +68,12 @@ nav a,.brand{white-space:nowrap}
 /* apps */
 .apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
 .app{display:flex;gap:14px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px}
-.app .ic{flex:none;width:44px;height:44px;border-radius:10px;color:#fff;font:700 16px/44px 'Bricolage Grotesque',sans-serif;text-align:center}
+.ic{flex:none;width:44px;height:44px;border-radius:10px;display:grid;place-items:center}
+.ic svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sub{font-size:20px;margin:40px 0 14px}
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chip{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 18px 5px 5px;font-weight:600;font-size:15px}
+.chip .ic{width:34px;height:34px;border-radius:50%}.chip svg{width:18px;height:18px}
 .app h3{font-size:17px;margin-bottom:2px}
 .app p{font-size:14.5px;color:var(--mute);line-height:1.45}
 /* experience */
@@ -134,6 +139,8 @@ footer{background:#1d141b;color:#9d909a;font-size:14px;padding:18px 0;text-align
 <h2>Odoo apps I work with</h2>
 <p class="lede">Hands-on in these areas, from configuration to day-to-day user support.</p>
 <div class="apps" id="appgrid"></div>
+<h3 class="sub">More apps and add-ons</h3><div class="chips" id="more"></div>
+<h3 class="sub">Platform</h3><div class="chips" id="plat"></div>
 </div></section>
 
 <section id="experience"><div class="wrap">
@@ -202,14 +209,19 @@ const FLOWS=[
 ["Test on staging","Odoo.sh","Run the change on staging with a copy of production data and test it with real user flows.","Works on dev data but fails with real data or access rights."],
 ["Release","Odoo.sh","Merge to production in a planned window, after confirming a recent backup exists.","Releasing without a fresh backup, changes landing during working hours."],
 ["Monitor","Odoo.sh","Watch production logs and backups after release, and help users with anything unexpected.","Slow views, cron or mail problems that appear only after release."]]}];
-const APPS=[["Purchase","Support for purchase orders, vendor management and approvals."],["Inventory","Support for stock, receipts, transfers and warehouses."],["Accounting","Support for invoicing, vendor bills and payments."],["Manufacturing","Support for production orders and bills of materials."],["Point of Sale","Support across multiple restaurant and hospitality branches."],["Multi-company","Intercompany transactions and inventory transfers."],["HR & Payroll","Functional support and training at Rons Enviro Care."],["Website","Odoo website development and setup."],["Odoo.sh","Branches, staging, deployments, builds, logs and backups."],["Mobile app","Trained 100+ field technicians on an Odoo-based app."]];
+const P={"Sales":"M3 17l6-6 4 4 8-8M15 7h6v6","CRM":"M3 4h18l-7 8v6l-4 2v-8z","Purchase":"M3 4h2l2.2 11h11l2-8H6.2M9 19.5h.01M17 19.5h.01","Inventory":"M3 8l9-5 9 5v8l-9 5-9-5zM3 8l9 5 9-5M12 13v8","Accounting":"M5 3h14v18H5zM8 7h8M8 11h2M12 11h2M8 15h2M12 15h2","Manufacturing":"M3 21V11l6 4v-4l6 4V5h6v16z","Point of Sale":"M4 5h16v14H4zM4 10h16M8 15h3","HR & Payroll":"M12 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM5 20c0-3.5 3-6 7-6s7 2.5 7 6","Contacts":"M6 3h12v18H6zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM9 17c0-1.7 1.3-3 3-3s3 1.3 3 3","Dashboards":"M4 20h16M7 20v-7M12 20V6M17 20v-10","eLearning":"M2 9l10-5 10 5-10 5zM6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5","Maintenance":"M14.5 6.5a4 4 0 0 0-5 5L3 18l3 3 6.5-6.5a4 4 0 0 0 5-5l-3 3-2.5-.5-.5-2.5z","Sign":"M4 17l1-4L15 3l4 4L9 17zM3 21h18","Approvals":"M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM8 12l3 3 5-6","Website":"M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18","Odoo.sh":"M7 18a4 4 0 0 1-.5-8A6 6 0 0 1 18 9.5 4 4 0 0 1 17 18z","Multi-company":"M4 21V8l8-4v17M12 21h8V11l-8-3M7 11h2M7 15h2M15 14h2M15 17h2","Mobile app":"M7 2h10v20H7zM11 18h2"};
+const APPS=[["Sales","Support for quotations, orders and pricing."],["CRM","Support for leads, pipeline and follow-ups."],["Purchase","Support for purchase orders, vendors and approvals."],["Inventory","Support for stock, receipts, transfers and warehouses."],["Accounting","Support for invoicing, vendor bills and payments."],["Manufacturing","Support for production orders and bills of materials."],["Point of Sale","Support across restaurant and hospitality branches."],["HR & Payroll","Functional support and training at Rons Enviro Care."]];
+const MORE=["Contacts","Dashboards","eLearning","Maintenance","Sign","Approvals","Website"],PLAT=["Odoo.sh","Multi-company","Mobile app"];
 const COL=["#714B67","#017E84","#E8803A","#5B6FD6","#B5446E"];
 const st=document.getElementById("stages"),dt=document.getElementById("detail");let flow=0,step=0;
 function draw(){st.innerHTML=FLOWS[flow].s.map((s,i)=>`<li><button aria-selected="${i==step}" data-s="${i}"><span class="dot">${i+1}</span>${s[0]}</button></li>`).join("");
 const s=FLOWS[flow].s[step],H=FLOWS[flow].h;dt.innerHTML=`<h3>${s[0]}${s[1]!=s[0]?`<span>${s[1]}</span>`:""}</h3><div><h4>${H[0]}</h4><p>${s[2]}</p></div><div><h4>${H[1]}</h4><p>${s[3]}</p></div>`}
 st.addEventListener("click",e=>{const b=e.target.closest("button");if(b){step=+b.dataset.s;draw();st.querySelector(`[data-s="${step}"]`).focus()}});
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{flow=+b.dataset.f;step=0;document.querySelectorAll(".tabs button").forEach(x=>x.setAttribute("aria-selected",x==b));draw()});
-document.getElementById("appgrid").innerHTML=APPS.map((a,i)=>`<div class="app"><div class="ic" style="background:${COL[i%5]}">${a[0].replace(/[^A-Za-z ]/g,"").split(" ").map(w=>w[0]).join("").slice(0,2)}</div><div><h3>${a[0]}</h3><p>${a[1]}</p></div></div>`).join("");
+const ico=(n,i)=>`<div class="ic" style="background:${COL[i%5]}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${P[n]}"/></svg></div>`;
+document.getElementById("appgrid").innerHTML=APPS.map((a,i)=>`<div class="app">${ico(a[0],i)}<div><h3>${a[0]}</h3><p>${a[1]}</p></div></div>`).join("");
+const chips=(id,l,o)=>document.getElementById(id).innerHTML=l.map((n,i)=>`<div class="chip">${ico(n,i+o)}${n}</div>`).join("");
+chips("more",MORE,1);chips("plat",PLAT,3);
 draw();
 const f=document.forms["submit-to-google-sheet"],m=document.getElementById("msg");
 f.addEventListener("submit",e=>{e.preventDefault();fetch("https://script.google.com/macros/s/AKfycbznowXGyTSuRrYoOT4UcFgDMkAHmpmVorTnlW1FsNdMaJoVQ8ey-JEnInYVFiZ1vU1Z/exec",{method:"POST",body:new FormData(f)}).then(()=>{m.textContent="Message sent. Thank you.";f.reset();setTimeout(()=>m.textContent="",5000)}).catch(()=>{m.textContent="Could not send. Please email me directly."})});
