@@ -13,6 +13,7 @@
 <style>
 :root{--plum:#714B67;--plum-d:#2B1D28;--teal:#017E84;--bg:#F5F4F7;--paper:#fff;--ink:#1E1A22;--mute:#625C6B;--line:#E2DDE7}
 *{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:64px}
 body{font:400 17px/1.6 'Public Sans',system-ui,sans-serif;color:var(--ink);background:var(--bg)}
 h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;line-height:1.15;letter-spacing:-.01em}
@@ -24,14 +25,35 @@ h2{font-size:clamp(28px,4vw,38px);margin-bottom:12px}
 .lede{color:var(--mute);max-width:62ch;margin-bottom:32px}
 /* top bar, styled like the Odoo navbar */
 header{position:sticky;top:0;z-index:5;background:var(--plum-d);color:#fff}
-header .wrap{display:flex;align-items:center;gap:24px;height:56px}
-.brand{font:700 18px 'Bricolage Grotesque',sans-serif;text-decoration:none;display:flex;align-items:center;gap:10px}
+header .wrap{display:flex;align-items:center;gap:12px;height:56px}
+.brand{font:700 18px 'Bricolage Grotesque',sans-serif;text-decoration:none}
 .grid-ico{width:18px;height:18px;display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);gap:2px}
 .grid-ico i{background:#fff;border-radius:1px}
-nav{margin-left:auto;display:flex;gap:22px;font-size:15px}
+nav{margin-left:12px;display:flex;gap:22px;font-size:15px}
 nav a{text-decoration:none;opacity:.85}nav a:hover{opacity:1;text-decoration:underline}
 nav a,.brand{white-space:nowrap}
-@media(max-width:640px){nav{gap:16px}nav a:nth-child(n+3){display:none}}
+/* odoo navbar */
+.gbtn,.co-btn{all:unset;box-sizing:border-box;cursor:pointer;color:#fff;border-radius:4px}
+.gbtn{padding:9px}.gbtn:hover,.co-btn:hover,.ni:hover{background:rgba(255,255,255,.12)}
+.right{margin-left:auto;display:flex;align-items:center;gap:4px}
+.ni{display:grid;place-items:center;width:36px;height:36px;color:#fff;border-radius:4px;opacity:.9}
+.ni svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.co-btn{padding:7px 10px;font-size:15px;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.av{position:relative;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;overflow:hidden;background:#C9732A;color:#fff;font:600 15px 'Public Sans',sans-serif;margin-left:6px}.av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.panel{position:fixed;top:60px;right:12px;width:min(340px,calc(100vw - 24px));background:#fff;color:var(--ink);border-radius:6px;box-shadow:0 8px 28px rgba(0,0,0,.3);z-index:10;overflow:hidden}
+.panel[hidden]{display:none}
+.panel.menu{right:auto;left:12px;width:min(230px,calc(100vw - 24px))}
+.menu a{display:block;padding:11px 18px;text-decoration:none;font-size:15.5px}.menu a:hover{background:#F1EEF3}
+.ph{display:flex;align-items:center;gap:12px;padding:12px 14px}
+.ph input[type=checkbox],.colist input{accent-color:var(--plum);width:17px;height:17px;margin:0}
+.ph .s2{position:relative;flex:1}
+.ph .s2 svg{position:absolute;left:10px;top:50%;margin-top:-8px;width:16px;height:16px;stroke:#444;fill:none;stroke-width:2;stroke-linecap:round}
+.ph .s2 input{width:100%;padding:8px 10px 8px 34px;border:1px solid #D5D8DC;border-radius:4px;font:inherit;font-size:15px;background:#fff;color:var(--ink)}.ph .s2 input::placeholder{color:#8b8593}.ph .s2 input:focus-visible{outline:2px solid var(--teal);outline-offset:0}
+.colist{list-style:none;margin:0 0 8px 20px;padding:0;border-left:1px solid var(--plum);max-height:300px;overflow:auto}
+.colist label{display:flex;align-items:center;gap:12px;padding:9px 12px;cursor:pointer;font-size:15px;color:#3A3546}
+.colist li:hover label{background:#F1EEF3}.colist li.cur label{background:#E6DAE0}
+@media(max-width:900px){nav{display:none}}
+@media(max-width:560px){.ni{display:none}.co-btn{max-width:130px}}
 /* hero */
 .hero{background:var(--paper);border-bottom:1px solid var(--line);padding:64px 0}
 .hero .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:center}
@@ -66,16 +88,6 @@ nav a,.brand{white-space:nowrap}
 .detail p{color:var(--mute);font-size:16px}
 @media(max-width:700px){.stages button{font-size:12px}.stages .dot{width:42px;height:42px;line-height:36px}.stages li:not(:last-child)::after{top:21px}.detail{grid-template-columns:1fr;padding:20px}}
 /* apps */
-.apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
-.app{display:flex;gap:14px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px}
-.ic{flex:none;width:44px;height:44px;border-radius:10px;display:grid;place-items:center}
-.ic svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.sub{font-size:20px;margin:40px 0 14px}
-.chips{display:flex;flex-wrap:wrap;gap:12px}
-.chip{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 18px 5px 5px;font-weight:600;font-size:15px}
-.chip .ic{width:34px;height:34px;border-radius:50%}.chip svg{width:18px;height:18px}
-.app h3{font-size:17px;margin-bottom:2px}
-.app p{font-size:14.5px;color:var(--mute);line-height:1.45}
 /* experience */
 .job{display:grid;grid-template-columns:170px 1fr;gap:8px 32px;padding:26px 0;border-top:1px solid var(--line)}
 .job .when{color:var(--mute);font-size:15px}
@@ -107,6 +119,31 @@ nav a,.brand{white-space:nowrap}
 .pill{display:inline-block;padding:2px 11px;border-radius:999px;font-size:12.5px;font-weight:600;color:#fff;white-space:nowrap}
 .pill.t{background:#0E7C8F}.pill.g{background:#1E7B34}.pill.n{background:#E3E6EA;color:#2B3035}
 @media(max-width:700px){.olist{min-width:600px}.olist th:nth-child(1),.olist td.ref,.olist th:nth-child(5),.olist td:nth-child(5){display:none}.srch{order:3;max-width:none;flex-basis:100%}}
+/* launcher */
+.launch{background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.4) 30%,rgba(255,255,255,.4) 52%,transparent 52%),linear-gradient(135deg,#D3D0E5,#E6E4F1 55%,#D9D6EA);border-block:1px solid #CBC8DC}
+.launch .lede{color:#4A4458}
+.tiles{display:grid;grid-template-columns:repeat(6,1fr);gap:28px 8px;justify-items:center}
+.tile{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;max-width:130px;text-align:center;font-size:15px;color:#3A3546;line-height:1.25}
+.tile .sq{width:80px;height:80px;border-radius:16px;background:#fff;display:grid;place-items:center;box-shadow:0 2px 8px rgba(50,40,80,.2);transition:transform .15s,box-shadow .15s}
+.tile svg{width:56px;height:56px}
+.tile:hover .sq{transform:translateY(-2px);box-shadow:0 6px 14px rgba(50,40,80,.25)}
+.tile[aria-pressed=true] .sq{outline:3px solid var(--plum)}
+.tile:focus-visible .sq{outline:3px solid var(--teal)}
+.adet{margin-top:36px;background:rgba(255,255,255,.7);border-radius:8px;padding:16px 22px;font-size:16px;color:#3A3546;min-height:60px}
+@media(max-width:700px){.tiles{grid-template-columns:repeat(3,1fr)}.tile .sq{width:72px;height:72px}}
+.adet .ah{display:flex;gap:14px;align-items:flex-start}
+.adet .mi{flex:none;width:48px;height:48px;border-radius:12px;background:#fff;display:grid;place-items:center;box-shadow:0 1px 5px rgba(50,40,80,.22)}
+.adet .mi svg{width:34px;height:34px}
+.adet h3{font-size:19px}.adet p{font-size:16px;color:#3A3546;margin-top:2px}
+.adet .x{all:unset;display:none;margin-left:auto;flex:none;cursor:pointer;width:36px;height:36px;border-radius:50%;text-align:center;line-height:34px;font-size:26px;color:#3A3546;background:#EEECF3}
+.scrim{display:none}
+@media(max-width:700px){
+.adet{position:fixed;left:0;right:0;bottom:0;margin:0;min-height:0;border-radius:18px 18px 0 0;background:#fff;box-shadow:0 -8px 30px rgba(30,20,50,.3);padding:20px 20px calc(26px + env(safe-area-inset-bottom));transform:translateY(105%);visibility:hidden;transition:transform .25s,visibility .25s;z-index:30}
+.adet.open{transform:none;visibility:visible}
+.adet .x{display:block}
+.scrim.on{display:block;position:fixed;inset:0;background:rgba(20,10,30,.4);z-index:25}
+}
+@media(prefers-reduced-motion:reduce){.adet{transition:none}}
 /* contact */
 .contact{background:var(--plum-d);color:#fff}
 .contact .lede{color:#CFC6CC}
@@ -126,8 +163,18 @@ footer{background:#1d141b;color:#9d909a;font-size:14px;padding:18px 0;text-align
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TCN47HFS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <header><div class="wrap">
-<a class="brand" href="#top"><span class="grid-ico" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Abidh Kareem</a>
+<button class="gbtn" id="appbtn" aria-haspopup="true" aria-expanded="false" aria-label="Open menu"><span class="grid-ico" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></button>
+<a class="brand" href="#top">Abidh Kareem</a>
 <nav aria-label="Main"><a href="#process">Process</a><a href="#apps">Odoo apps</a><a href="#experience">Experience</a><a href="#contact">Contact</a></nav>
+<div class="right">
+<a class="ni" href="#contact" title="Message me" aria-label="Message me"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></a>
+<a class="ni" href="#experience" title="Experience" aria-label="Experience"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></a>
+<a class="ni" href="#process" title="How I work" aria-label="How I work"><svg viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0-5 5L3 18l3 3 6.5-6.5a4 4 0 0 0 5-5l-3 3-2.5-.5-.5-2.5z"/></svg></a>
+<button class="co-btn" id="cobtn" aria-haspopup="true" aria-expanded="false" title="Switch companies"><span id="colabel">All companies</span></button>
+<span class="av" title="Abidh Kareem">A<img src="images/abidh-profile.jpg" alt="" onerror="this.remove()"></span>
+</div>
+<div class="panel menu" id="menu" hidden><a href="#process">How I support Odoo</a><a href="#apps">Odoo apps</a><a href="#experience">Experience</a><a href="#background">Background</a><a href="#contact">Contact</a></div>
+<div class="panel" id="copanel" hidden><div class="ph"><input type="checkbox" id="coall" checked aria-label="Select all companies"><div class="s2"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="coq" type="search" placeholder="Search..." aria-label="Search companies"></div></div><ul class="colist" id="colist"></ul></div>
 </div></header>
 
 <main id="top">
@@ -158,41 +205,41 @@ footer{background:#1d141b;color:#9d909a;font-size:14px;padding:18px 0;text-align
 <div class="detail" id="detail" aria-live="polite"></div>
 </div></section>
 
-<section id="apps" style="background:var(--paper);border-block:1px solid var(--line)"><div class="wrap">
+<section id="apps" class="launch"><div class="wrap">
 <h2>Odoo apps I work with</h2>
-<p class="lede">Hands-on in these areas, from configuration to day-to-day user support.</p>
-<div class="apps" id="appgrid"></div>
-<h3 class="sub">More apps and add-ons</h3><div class="chips" id="more"></div>
-<h3 class="sub">Platform</h3><div class="chips" id="plat"></div>
+<p class="lede">Hands-on in these areas, from configuration to day-to-day user support. Select an app to see more.</p>
+<div class="tiles" id="tiles"></div>
+<div class="adet" id="adet" aria-live="polite">Select an app to see how I support it.</div>
+<div class="scrim" id="scrim"></div>
 </div></section>
 
 <section id="experience"><div class="wrap">
 <h2>Experience</h2>
 <p class="lede">Odoo and ERP roles, newest first.</p>
-<div class="job"><div class="when">Dec 2025 to present<br>Dubai, UAE</div><div>
+<div class="job" data-co="Alrais Holding"><div class="when">Dec 2025 to present<br>Dubai, UAE</div><div>
 <h3>Odoo Assistant <span>Alrais Holding</span></h3>
 <ul><li>Support all departments across all Odoo modules, and monitor daily ERP operations.</li>
 <li>Give management a monthly report on support activity and system health.</li>
 <li>Manage multi-company setups, including intercompany transactions and inventory transfers.</li>
 <li>Support POS across multiple restaurant and hospitality branches.</li>
 <li>Work on Odoo.sh: branch management, staging-to-production deployments, module customization, and monitoring builds, logs and backups.</li></ul></div></div>
-<div class="job"><div class="when">Sep 2025 to Nov 2025<br>Remote, Dubai</div><div>
+<div class="job" data-co="Techxcel Technologies"><div class="when">Sep 2025 to Nov 2025<br>Remote, Dubai</div><div>
 <h3>Functional Consultant <span>Techxcel Technologies (ERPNext)</span></h3>
 <ul><li>Gathered requirements and turned them into functional specifications for developers.</li>
 <li>Assisted end-to-end ERPNext implementations and trained users online and onsite.</li></ul></div></div>
-<div class="job"><div class="when">Jan 2024 to Jul 2025<br>Dubai, UAE</div><div>
+<div class="job" data-co="Rons Enviro Care"><div class="when">Jan 2024 to Jul 2025<br>Dubai, UAE</div><div>
 <h3>Software Support <span>Rons Enviro Care</span></h3>
 <ul><li>Implemented the full Odoo cycle for a facility management business.</li>
 <li>Trained 150+ users and gathered department-wise requirements for Inventory, HR, Payroll and Accounting.</li>
 <li>Trained 100+ technicians on the Odoo-based mobile app.</li></ul></div></div>
-<div class="job"><div class="when">Feb 2022 to Nov 2022<br>Thrissur, India</div><div>
+<div class="job" data-co="Al Aish Tech"><div class="when">Feb 2022 to Nov 2022<br>Thrissur, India</div><div>
 <h3>Odoo Developer <span>Al Aish Tech Cont.</span></h3>
 <ul><li>Assisted with Odoo implementation, data migration and module customization, including custom modules.</li>
 <li>Handled backups and upgrades, and trained end users.</li></ul></div></div>
-<div class="cp"><a class="btn" href="#contact">New</a><h3>Background</h3>
+<div class="cp" id="background"><a class="btn" href="#contact">New</a><h3>Background</h3>
 <div class="srch"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Search..." aria-label="Search background"></div>
 <span class="pager" id="pg">1-9 / 9</span></div>
-<div class="olist-box"><table class="olist"><thead><tr><th>Number</th><th>Organisation</th><th>Role / Qualification</th><th>Period</th><th>Location</th><th>Status</th></tr></thead><tbody><tr class="grp" data-grp="exp"><td colspan="6"><button aria-expanded="true"><i></i>Experience before Odoo (2)</button></td></tr><tr data-g="exp"><td class="ref">BG-001</td><td>Goal10x Technologies</td><td>Digital Marketing Pro &amp; Web Developer<span class='sub-d'>Shopify sites, social media, LinkedIn leads, LMS administration</span></td><td>Dec 2022 – Nov 2023</td><td>Bengaluru, India</td><td><span class="pill t">Experience</span></td></tr><tr data-g="exp"><td class="ref">BG-002</td><td>Squad Solutions</td><td>Digital Marketing Executive<span class='sub-d'>LinkedIn lead generation, video editing, Shopify maintenance</span></td><td>Nov 2020 – Dec 2021</td><td>Kochi, India</td><td><span class="pill t">Experience</span></td></tr><tr class="grp" data-grp="edu"><td colspan="6"><button aria-expanded="true"><i></i>Education (3)</button></td></tr><tr data-g="edu"><td class="ref">ED-001</td><td>University of Calicut</td><td>Bachelor of Computer Application</td><td>2019</td><td>Kerala, India</td><td><span class="pill g">Completed</span></td></tr><tr data-g="edu"><td class="ref">ED-002</td><td>I-Net Infotech</td><td>Python Full Stack Developer<span class='sub-d'>Python, Django, database integration</span></td><td>Sep 2019 – Feb 2020</td><td>Kochi, India</td><td><span class="pill g">Completed</span></td></tr><tr data-g="edu"><td class="ref">ED-003</td><td>Digital Magnet</td><td>All in One Digital Marketing</td><td>2022</td><td>–</td><td><span class="pill g">Completed</span></td></tr><tr class="grp" data-grp="lang"><td colspan="6"><button aria-expanded="true"><i></i>Languages (4)</button></td></tr><tr data-g="lang"><td class="ref">LG-001</td><td>English</td><td>Language</td><td>–</td><td>–</td><td><span class="pill n">Read · Write · Speak</span></td></tr><tr data-g="lang"><td class="ref">LG-002</td><td>Hindi</td><td>Language</td><td>–</td><td>–</td><td><span class="pill n">Read · Write · Speak</span></td></tr><tr data-g="lang"><td class="ref">LG-003</td><td>Malayalam</td><td>Language</td><td>–</td><td>–</td><td><span class="pill n">Read · Write · Speak</span></td></tr><tr data-g="lang"><td class="ref">LG-004</td><td>Arabic</td><td>Language</td><td>–</td><td>–</td><td><span class="pill n">Read · Write</span></td></tr></tbody></table></div>
+<div class="olist-box"><table class="olist"><thead><tr><th>Number</th><th>Organisation</th><th>Role / Qualification</th><th>Period</th><th>Location</th><th>Status</th></tr></thead><tbody><tr class="grp" data-grp="exp"><td colspan="6"><button aria-expanded="true"><i></i>Experience before Odoo (2)</button></td></tr><tr data-g="exp" data-co="Goal10x Technologies"><td class="ref">BG-001</td><td>Goal10x Technologies</td><td>Digital Marketing Pro &amp; Web Developer<span class='sub-d'>Shopify sites, social media, LinkedIn leads, LMS administration</span></td><td>Dec 2022 – Nov 2023</td><td>Bengaluru, India</td><td><span class="pill t">Experience</span></td></tr><tr data-g="exp" data-co="Squad Solutions"><td class="ref">BG-002</td><td>Squad Solutions</td><td>Digital Marketing Executive<span class='sub-d'>LinkedIn lead generation, video editing, Shopify maintenance</span></td><td>Nov 2020 – Dec 2021</td><td>Kochi, India</td><td><span class="pill t">Experience</span></td></tr><tr class="grp" data-grp="edu"><td colspan="6"><button aria-expanded="true"><i></i>Education (3)</button></td></tr><tr data-g="edu"><td class="ref">ED-001</td><td>University of Calicut</td><td>Bachelor of Computer Application</td><td>2019</td><td>Kerala, India</td><td><span class="pill g">Completed</span></td></tr><tr data-g="edu"><td class="ref">ED-002</td><td>I-Net Infotech</td><td>Python Full Stack Developer<span class='sub-d'>Python, Django, database integration</span></td><td>Sep 2019 – Feb 2020</td><td>Kochi, India</td><td><span class="pill g">Completed</span></td></tr><tr data-g="edu"><td class="ref">ED-003</td><td>Digital Magnet</td><td>All in One Digital Marketing</td><td>2022</td><td>–</td><td><span class="pill g">Completed</span></td></tr><tr class="grp" data-grp="lang"><td colspan="6"><button aria-expanded="true"><i></i>Languages (4)</button></td></tr><tr data-g="lang"><td class="ref">LG-001</td><td>English</td><td>Language</td><td>–</td><td>–</td><td><span class="pill n">Read · Write · Speak</span></td></tr><tr data-g="lang"><td class="ref">LG-002</td><td>Hindi</td><td>Language</td><td>–</td><td>–</td><td><span class="pill n">Read · Write · Speak</span></td></tr><tr data-g="lang"><td class="ref">LG-003</td><td>Malayalam</td><td>Language</td><td>–</td><td>–</td><td><span class="pill n">Read · Write · Speak</span></td></tr><tr data-g="lang"><td class="ref">LG-004</td><td>Arabic</td><td>Language</td><td>–</td><td>–</td><td><span class="pill n">Read · Write</span></td></tr></tbody></table></div>
 </div></section>
 
 <section id="contact" class="contact"><div class="wrap">
@@ -235,27 +282,49 @@ const FLOWS=[
 ["Test on staging","Odoo.sh","Run the change on staging with a copy of production data and test it with real user flows.","Works on dev data but fails with real data or access rights."],
 ["Release","Odoo.sh","Merge to production in a planned window, after confirming a recent backup exists.","Releasing without a fresh backup, changes landing during working hours."],
 ["Monitor","Odoo.sh","Watch production logs and backups after release, and help users with anything unexpected.","Slow views, cron or mail problems that appear only after release."]]}];
-const P={"Sales":"M3 17l6-6 4 4 8-8M15 7h6v6","CRM":"M3 4h18l-7 8v6l-4 2v-8z","Purchase":"M3 4h2l2.2 11h11l2-8H6.2M9 19.5h.01M17 19.5h.01","Inventory":"M3 8l9-5 9 5v8l-9 5-9-5zM3 8l9 5 9-5M12 13v8","Accounting":"M5 3h14v18H5zM8 7h8M8 11h2M12 11h2M8 15h2M12 15h2","Manufacturing":"M3 21V11l6 4v-4l6 4V5h6v16z","Point of Sale":"M4 5h16v14H4zM4 10h16M8 15h3","HR & Payroll":"M12 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM5 20c0-3.5 3-6 7-6s7 2.5 7 6","Contacts":"M6 3h12v18H6zM12 11a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM9 17c0-1.7 1.3-3 3-3s3 1.3 3 3","Dashboards":"M4 20h16M7 20v-7M12 20V6M17 20v-10","eLearning":"M2 9l10-5 10 5-10 5zM6 11.5V16c0 1.5 3 3 6 3s6-1.5 6-3v-4.5","Maintenance":"M14.5 6.5a4 4 0 0 0-5 5L3 18l3 3 6.5-6.5a4 4 0 0 0 5-5l-3 3-2.5-.5-.5-2.5z","Sign":"M4 17l1-4L15 3l4 4L9 17zM3 21h18","Approvals":"M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM8 12l3 3 5-6","Website":"M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18","Odoo.sh":"M7 18a4 4 0 0 1-.5-8A6 6 0 0 1 18 9.5 4 4 0 0 1 17 18z","Multi-company":"M4 21V8l8-4v17M12 21h8V11l-8-3M7 11h2M7 15h2M15 14h2M15 17h2","Mobile app":"M7 2h10v20H7zM11 18h2"};
-const APPS=[["Sales","Support for quotations, orders and pricing."],["CRM","Support for leads, pipeline and follow-ups."],["Purchase","Support for purchase orders, vendors and approvals."],["Inventory","Support for stock, receipts, transfers and warehouses."],["Accounting","Support for invoicing, vendor bills and payments."],["Manufacturing","Support for production orders and bills of materials."],["Point of Sale","Support across restaurant and hospitality branches."],["HR & Payroll","Functional support and training at Rons Enviro Care."]];
-const MORE=["Contacts","Dashboards","eLearning","Maintenance","Sign","Approvals","Website"],PLAT=["Odoo.sh","Multi-company","Mobile app"];
-const COL=["#714B67","#017E84","#E8803A","#5B6FD6","#B5446E"];
 const st=document.getElementById("stages"),dt=document.getElementById("detail");let flow=0,step=0;
 function draw(){st.innerHTML=FLOWS[flow].s.map((s,i)=>`<li><button aria-selected="${i==step}" data-s="${i}"><span class="dot">${i+1}</span>${s[0]}</button></li>`).join("");
 const s=FLOWS[flow].s[step],H=FLOWS[flow].h;dt.innerHTML=`<h3>${s[0]}${s[1]!=s[0]?`<span>${s[1]}</span>`:""}</h3><div><h4>${H[0]}</h4><p>${s[2]}</p></div><div><h4>${H[1]}</h4><p>${s[3]}</p></div>`}
 st.addEventListener("click",e=>{const b=e.target.closest("button");if(b){step=+b.dataset.s;draw();st.querySelector(`[data-s="${step}"]`).focus()}});
 document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{flow=+b.dataset.f;step=0;document.querySelectorAll(".tabs button").forEach(x=>x.setAttribute("aria-selected",x==b));draw()});
-const ico=(n,i)=>`<div class="ic" style="background:${COL[i%5]}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${P[n]}"/></svg></div>`;
-document.getElementById("appgrid").innerHTML=APPS.map((a,i)=>`<div class="app">${ico(a[0],i)}<div><h3>${a[0]}</h3><p>${a[1]}</p></div></div>`).join("");
-const chips=(id,l,o)=>document.getElementById(id).innerHTML=l.map((n,i)=>`<div class="chip">${ico(n,i+o)}${n}</div>`).join("");
-chips("more",MORE,1);chips("plat",PLAT,3);
+const IC={"Sales": "<path d=\"M8 8h16l17 17-16 16L8 24z\" fill=\"#FFA52B\"/><circle cx=\"16\" cy=\"16\" r=\"3.5\" fill=\"#fff\"/><path d=\"M26 26l8-8 5 5-8 8z\" fill=\"#8A4F7D\"/>", "CRM": "<path d=\"M5 8h38L29 25H19z\" fill=\"#1BBFA3\"/><path d=\"M19 25h10v13l-10 5z\" fill=\"#8A4F7D\"/><circle cx=\"38\" cy=\"38\" r=\"5\" fill=\"#FFA52B\"/>", "Purchase": "<path d=\"M16 19l6-11M32 19l-6-11\" stroke=\"#FFA52B\" stroke-width=\"4\" stroke-linecap=\"round\" fill=\"none\"/><path d=\"M5 19h38l-4 21H9z\" fill=\"#8A4F7D\"/><path d=\"M15 26v8M24 26v8M33 26v8\" stroke=\"#fff\" stroke-width=\"3\" stroke-linecap=\"round\"/>", "Inventory": "<path d=\"M24 5l17 9-17 9-17-9z\" fill=\"#FFA52B\"/><path d=\"M7 14l17 9v20L7 34z\" fill=\"#8A4F7D\"/><path d=\"M41 14v20L24 43V23z\" fill=\"#1BBFA3\"/>", "Accounting": "<rect x=\"10\" y=\"5\" width=\"28\" height=\"38\" rx=\"5\" fill=\"#8A4F7D\"/><rect x=\"14\" y=\"9\" width=\"20\" height=\"9\" rx=\"2\" fill=\"#1BBFA3\"/><g fill=\"#fff\"><circle cx=\"17\" cy=\"25\" r=\"2.2\"/><circle cx=\"24\" cy=\"25\" r=\"2.2\"/><circle cx=\"31\" cy=\"25\" r=\"2.2\"/><circle cx=\"17\" cy=\"32\" r=\"2.2\"/><circle cx=\"24\" cy=\"32\" r=\"2.2\"/></g><rect x=\"28\" y=\"29.5\" width=\"6\" height=\"9\" rx=\"3\" fill=\"#FFA52B\"/>", "Manufacturing": "<rect x=\"32\" y=\"6\" width=\"7\" height=\"17\" rx=\"1.5\" fill=\"#FFA52B\"/><path d=\"M5 41V21l12 7v-7l12 7v-7l14 8v12z\" fill=\"#8A4F7D\"/><g fill=\"#1BBFA3\"><rect x=\"11\" y=\"33\" width=\"6\" height=\"6\" rx=\"1\"/><rect x=\"21\" y=\"33\" width=\"6\" height=\"6\" rx=\"1\"/><rect x=\"31\" y=\"33\" width=\"6\" height=\"6\" rx=\"1\"/></g>", "Point of Sale": "<path d=\"M6 8h9l-1 12H3z\" fill=\"#FFA52B\"/><path d=\"M15 8h9v12H14z\" fill=\"#8A4F7D\"/><path d=\"M24 8h9l1 12H24z\" fill=\"#FFA52B\"/><path d=\"M33 8h9l3 12H34z\" fill=\"#8A4F7D\"/><rect x=\"7\" y=\"22\" width=\"34\" height=\"19\" rx=\"2\" fill=\"#1BBFA3\"/><rect x=\"20\" y=\"29\" width=\"9\" height=\"12\" rx=\"1.5\" fill=\"#fff\"/>", "HR & Payroll": "<rect x=\"5\" y=\"11\" width=\"38\" height=\"26\" rx=\"4\" fill=\"#8A4F7D\"/><circle cx=\"24\" cy=\"24\" r=\"7\" fill=\"#1BBFA3\"/><circle cx=\"24\" cy=\"24\" r=\"3\" fill=\"#fff\"/><circle cx=\"11\" cy=\"24\" r=\"2.5\" fill=\"#FFA52B\"/><circle cx=\"37\" cy=\"24\" r=\"2.5\" fill=\"#FFA52B\"/>", "Contacts": "<rect x=\"10\" y=\"9\" width=\"32\" height=\"34\" rx=\"5\" fill=\"#FF7B7B\"/><rect x=\"6\" y=\"5\" width=\"32\" height=\"34\" rx=\"5\" fill=\"#1B5C7A\"/><circle cx=\"22\" cy=\"18\" r=\"5.5\" fill=\"#fff\"/><path d=\"M11 34c0-6 5-9 11-9s11 3 11 9z\" fill=\"#1BBFA3\"/>", "Dashboards": "<circle cx=\"24\" cy=\"24\" r=\"17\" fill=\"#1BBFA3\"/><path d=\"M24 24V7a17 17 0 0 1 17 17z\" fill=\"#8A4F7D\"/><path d=\"M24 24h17a17 17 0 0 1-9 15z\" fill=\"#FFA52B\"/>", "eLearning": "<path d=\"M5 11c7-2 14-1 19 3v26c-5-4-12-5-19-3z\" fill=\"#8A4F7D\"/><path d=\"M43 11c-7-2-14-1-19 3v26c5-4 12-5 19-3z\" fill=\"#1BBFA3\"/><path d=\"M20 5h8v14l-4-3-4 3z\" fill=\"#FFA52B\"/>", "Maintenance": "<rect x=\"20\" y=\"4\" width=\"8\" height=\"10\" rx=\"2\" fill=\"#FFA52B\"/><rect x=\"20\" y=\"34\" width=\"8\" height=\"10\" rx=\"2\" fill=\"#FFA52B\"/><rect x=\"4\" y=\"20\" width=\"10\" height=\"8\" rx=\"2\" fill=\"#FFA52B\"/><rect x=\"34\" y=\"20\" width=\"10\" height=\"8\" rx=\"2\" fill=\"#FFA52B\"/><g transform=\"rotate(45 24 24)\"><rect x=\"20\" y=\"4\" width=\"8\" height=\"10\" rx=\"2\" fill=\"#FFA52B\"/><rect x=\"20\" y=\"34\" width=\"8\" height=\"10\" rx=\"2\" fill=\"#FFA52B\"/><rect x=\"4\" y=\"20\" width=\"10\" height=\"8\" rx=\"2\" fill=\"#FFA52B\"/><rect x=\"34\" y=\"20\" width=\"10\" height=\"8\" rx=\"2\" fill=\"#FFA52B\"/></g><circle cx=\"24\" cy=\"24\" r=\"13\" fill=\"#2D9CF0\"/><circle cx=\"24\" cy=\"24\" r=\"5.5\" fill=\"#fff\"/>", "Sign": "<path d=\"M31 5l9 9-20 20-11 2 2-11z\" fill=\"#FFA52B\"/><path d=\"M31 5l9 9-4 4-9-9z\" fill=\"#8A4F7D\"/><path d=\"M6 43h36\" stroke=\"#1BBFA3\" stroke-width=\"4\" stroke-linecap=\"round\"/>", "Approvals": "<circle cx=\"22\" cy=\"22\" r=\"16\" fill=\"#1BBFA3\"/><path d=\"M14 22l6 6 11-12\" stroke=\"#fff\" stroke-width=\"4.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><circle cx=\"37\" cy=\"37\" r=\"7\" fill=\"#8A4F7D\"/><circle cx=\"37\" cy=\"37\" r=\"2.5\" fill=\"#fff\"/>", "Website": "<circle cx=\"24\" cy=\"24\" r=\"18\" fill=\"#2D9CF0\"/><g fill=\"none\" stroke=\"#fff\" stroke-width=\"2.5\"><ellipse cx=\"24\" cy=\"24\" rx=\"7.5\" ry=\"18\"/><path d=\"M6 24h36M9 15h30M9 33h30\"/></g><circle cx=\"37\" cy=\"37\" r=\"5\" fill=\"#FFA52B\"/>", "Odoo.sh": "<path d=\"M13 38a9 9 0 0 1-1-18 12 12 0 0 1 23-2 10 10 0 0 1 1 20z\" fill=\"#2D9CF0\"/><path d=\"M24 33V21M18 26l6-6 6 6\" stroke=\"#fff\" stroke-width=\"3.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/><circle cx=\"40\" cy=\"39\" r=\"4\" fill=\"#8A4F7D\"/>", "Multi-company": "<rect x=\"6\" y=\"14\" width=\"18\" height=\"29\" rx=\"2\" fill=\"#8A4F7D\"/><rect x=\"24\" y=\"23\" width=\"18\" height=\"20\" rx=\"2\" fill=\"#1BBFA3\"/><rect x=\"14\" y=\"5\" width=\"6\" height=\"9\" rx=\"1\" fill=\"#FFA52B\"/><g fill=\"#fff\"><rect x=\"10\" y=\"19\" width=\"4\" height=\"4\"/><rect x=\"16\" y=\"19\" width=\"4\" height=\"4\"/><rect x=\"10\" y=\"27\" width=\"4\" height=\"4\"/><rect x=\"16\" y=\"27\" width=\"4\" height=\"4\"/><rect x=\"28\" y=\"28\" width=\"4\" height=\"4\"/><rect x=\"34\" y=\"28\" width=\"4\" height=\"4\"/><rect x=\"28\" y=\"35\" width=\"4\" height=\"4\"/><rect x=\"34\" y=\"35\" width=\"4\" height=\"4\"/></g>", "Mobile app": "<rect x=\"13\" y=\"4\" width=\"22\" height=\"40\" rx=\"5\" fill=\"#8A4F7D\"/><rect x=\"16.5\" y=\"9\" width=\"15\" height=\"26\" rx=\"2\" fill=\"#1BBFA3\"/><circle cx=\"24\" cy=\"39.5\" r=\"2.2\" fill=\"#FFA52B\"/>"};
+const DS={"Sales": "Support for quotations, orders and pricing.", "CRM": "Support for leads, pipeline and follow-ups.", "Purchase": "Support for purchase orders, vendors and approvals.", "Inventory": "Support for stock, receipts, transfers and warehouses.", "Accounting": "Support for invoicing, vendor bills and payments.", "Manufacturing": "Support for production orders and bills of materials.", "Point of Sale": "Support across restaurant and hospitality branches.", "HR & Payroll": "Functional support and training at Rons Enviro Care.", "Odoo.sh": "Branches, staging, deployments, builds, logs and backups.", "Multi-company": "Intercompany transactions and inventory transfers.", "Mobile app": "Trained 100+ field technicians on an Odoo-based app."};
+const tl=document.getElementById("tiles"),ad=document.getElementById("adet");
+tl.innerHTML=["Sales", "CRM", "Purchase", "Inventory", "Accounting", "Manufacturing", "Point of Sale", "HR & Payroll", "Contacts", "Dashboards", "eLearning", "Maintenance", "Sign", "Approvals", "Website", "Odoo.sh", "Multi-company", "Mobile app"].map(n=>`<button class="tile" aria-pressed="false" data-n="${n}"><span class="sq"><svg viewBox="0 0 48 48" aria-hidden="true">${IC[n]}</svg></span>${n}</button>`).join("");
+let lastTile=null;
+const scrim=document.getElementById("scrim");
+function closeSheet(){ad.classList.remove("open");scrim.classList.remove("on");tl.querySelectorAll(".tile").forEach(x=>x.setAttribute("aria-pressed","false"));if(lastTile)lastTile.focus({preventScroll:true})}
+tl.addEventListener("click",e=>{const b=e.target.closest(".tile");if(!b)return;lastTile=b;tl.querySelectorAll(".tile").forEach(x=>x.setAttribute("aria-pressed",x==b));const n=b.dataset.n;
+ad.innerHTML=`<div class="ah"><span class="mi"><svg viewBox="0 0 48 48" aria-hidden="true">${IC[n]}</svg></span><div><h3>${n}</h3><p>${DS[n]||"Day-to-day user support and configuration."}</p></div><button class="x" aria-label="Close">&times;</button></div>`;
+ad.classList.add("open");scrim.classList.add("on");if(matchMedia("(max-width:700px)").matches)ad.querySelector(".x").focus({preventScroll:true})});
+ad.addEventListener("click",e=>{if(e.target.closest(".x"))closeSheet()});
+scrim.addEventListener("click",closeSheet);
+document.addEventListener("keydown",e=>{if(e.key=="Escape"&&ad.classList.contains("open"))closeSheet()});
 draw();
 
+const CO=[["Alrais Holding",1],["Techxcel Technologies"],["Rons Enviro Care"],["Goal10x Technologies"],["Al Aish Tech"],["Squad Solutions"]],sel=new Set(CO.map(c=>c[0]));
 const rowsEl=[...document.querySelectorAll(".olist tbody tr[data-g]")],grps=[...document.querySelectorAll(".olist .grp")],pg=document.getElementById("pg");
 function filt(){const q=document.getElementById("q").value.toLowerCase().trim();let n=0;
-rowsEl.forEach(r=>{const g=document.querySelector(`.grp[data-grp="${r.dataset.g}"]`),show=r.textContent.toLowerCase().includes(q);r.dataset.hit=show?1:0;r.hidden=!show||g.classList.contains("closed");if(show)n++});
-grps.forEach(g=>{g.hidden=!rowsEl.some(r=>r.dataset.g==g.dataset.grp&&r.dataset.hit!=0)});pg.textContent=n?`1-${n} / ${n}`:"0 / 0"}
+rowsEl.forEach(r=>{const g=document.querySelector(`.grp[data-grp="${r.dataset.g}"]`),show=r.textContent.toLowerCase().includes(q)&&(!r.dataset.co||sel.has(r.dataset.co));r.dataset.hit=show?1:0;r.hidden=!show||g.classList.contains("closed");if(show)n++});
+grps.forEach(g=>{const b=g.querySelector('button');g.dataset.t=g.dataset.t||b.lastChild.textContent.replace(/ \(\d+\)$/,'');const c=rowsEl.filter(r=>r.dataset.g==g.dataset.grp&&r.dataset.hit!=0).length;b.lastChild.textContent=g.dataset.t+' ('+c+')';g.hidden=!c});pg.textContent=n?`1-${n} / ${n}`:"0 / 0"}
 grps.forEach(g=>g.onclick=()=>{g.classList.toggle("closed");g.querySelector("button").setAttribute("aria-expanded",!g.classList.contains("closed"));filt()});
 document.getElementById("q").addEventListener("input",filt);filt();
+
+const $=id=>document.getElementById(id),cl=$("colist"),coall=$("coall");
+cl.innerHTML=CO.map(c=>`<li class="${c[1]?"cur":""}"><label><input type="checkbox" data-co="${c[0]}" checked><span>${c[0]}</span></label></li>`).join("");
+function coSync(){$("colabel").textContent=sel.size==CO.length?"All companies":sel.size==1?[...sel][0]:sel.size+" companies";
+document.querySelectorAll(".job[data-co]").forEach(j=>j.hidden=!sel.has(j.dataset.co));
+cl.querySelectorAll("input").forEach(i=>i.checked=sel.has(i.dataset.co));coall.checked=sel.size==CO.length;coall.indeterminate=sel.size>0&&sel.size<CO.length;filt()}
+cl.addEventListener("change",e=>{const i=e.target;if(i.checked)sel.add(i.dataset.co);else if(sel.size>1)sel.delete(i.dataset.co);coSync()});
+coall.addEventListener("change",()=>{sel.clear();CO.forEach(c=>{if(coall.checked||c[1])sel.add(c[0])});coSync()});
+$("coq").addEventListener("input",e=>{const q=e.target.value.toLowerCase();cl.querySelectorAll("li").forEach(li=>li.hidden=!li.textContent.toLowerCase().includes(q))});
+const pairs=[["appbtn","menu"],["cobtn","copanel"]];
+function shut(){pairs.forEach(([b,p])=>{$(p).hidden=true;$(b).setAttribute("aria-expanded","false")})}
+pairs.forEach(([b,p])=>$(b).addEventListener("click",e=>{e.stopPropagation();const open=$(p).hidden;shut();if(open){$(p).hidden=false;$(b).setAttribute("aria-expanded","true");if(p=="copanel")$("coq").focus()}}));
+document.addEventListener("click",e=>{if(!e.target.closest(".panel"))shut()});
+$("menu").addEventListener("click",shut);
+document.addEventListener("keydown",e=>{if(e.key=="Escape"){shut()}});
+coSync();
 const f=document.forms["submit-to-google-sheet"],m=document.getElementById("msg");
 f.addEventListener("submit",e=>{e.preventDefault();fetch("https://script.google.com/macros/s/AKfycbznowXGyTSuRrYoOT4UcFgDMkAHmpmVorTnlW1FsNdMaJoVQ8ey-JEnInYVFiZ1vU1Z/exec",{method:"POST",body:new FormData(f)}).then(()=>{m.textContent="Message sent. Thank you.";f.reset();setTimeout(()=>m.textContent="",5000)}).catch(()=>{m.textContent="Could not send. Please email me directly."})});
 </script>
