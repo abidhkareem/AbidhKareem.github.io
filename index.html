@@ -370,16 +370,19 @@ jobs.forEach(j=>j.addEventListener("mouseenter",()=>{if(matchMedia("(hover:hover
 ex.addEventListener("mouseleave",pick);pick();
 coSync();
 const f=document.forms["submit-to-google-sheet"],m=document.getElementById("msg"),sb=f.querySelector("button"),MAIL="abidhkareem@gmail.com",SHEET="https://script.google.com/macros/s/AKfycbznowXGyTSuRrYoOT4UcFgDMkAHmpmVorTnlW1FsNdMaJoVQ8ey-JEnInYVFiZ1vU1Z/exec",DBG=/[?&]debug/.test(location.search);
+async function post(url,o){const r=await fetch(url,o),t=await r.text();let j=null;try{j=JSON.parse(t)}catch(_){}
+return{t,j,bad:!r.ok||t.trim().startsWith("<")||!!(j&&(j.result==="error"||j.error))}}
 f.addEventListener("submit",async e=>{e.preventDefault();sb.disabled=true;m.textContent="Sending...";
-const d=Object.fromEntries(new FormData(f)),log=new FormData(f);
-try{const r=await fetch("https://formsubmit.co/ajax/"+MAIL,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({name:d.Name,email:d.Email,message:d.Message,_subject:"New message from abidhkareem.github.io",_replyto:d.Email,_template:"table",_honey:d._honey||""})});
-const t=await r.text();let j=null;try{j=JSON.parse(t)}catch(_){}
-const refused=j&&String(j.success)==="false"&&!/activ/i.test(j.message||"");
-if(!r.ok||!j||refused)throw new Error("HTTP "+r.status+" - "+t.slice(0,200));
-try{fetch(SHEET,{method:"POST",mode:"no-cors",body:log})}catch(_){}
-m.textContent="Message sent. Thank you.";f.reset()}
-catch(err){console.error("Contact form error:",err);m.innerHTML='Could not send. Please email <a href="mailto:abidhkareem@gmail.com" style="color:#fff">abidhkareem@gmail.com</a>.'+(DBG?'<br><small>Debug: '+String(err.message).replace(/</g,"&lt;")+'</small>':"")}
-finally{sb.disabled=false;setTimeout(()=>{if(!DBG)m.textContent=""},8000)}});
+const d=Object.fromEntries(new FormData(f));
+const [a,b]=await Promise.allSettled([
+post(SHEET,{method:"POST",body:new FormData(f)}),
+post("https://formsubmit.co/ajax/"+MAIL,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({name:d.Name,email:d.Email,message:d.Message,_subject:"New message from abidhkareem.github.io",_replyto:d.Email,_template:"table",_honey:d._honey||""})})]);
+const A=a.status=="fulfilled"&&!a.value.bad,B=b.status=="fulfilled"&&!b.value.bad&&!!b.value.j&&(String(b.value.j.success)!="false"||/activ/i.test(b.value.j.message||""));
+const why=x=>x.status=="fulfilled"?x.value.t.slice(0,160):String(x.reason&&x.reason.message||x.reason);
+const dbg=DBG?'<br><small>Sheet: '+(A?"saved":"FAILED")+" - "+why(a)+'<br>Email: '+(B?"accepted":"FAILED")+" - "+why(b)+'</small>':"";
+if(A||B){m.innerHTML="Message sent. Thank you."+dbg.replace(/<(?!\/?(br|small)\b)/g,"&lt;");f.reset()}
+else{console.error("Contact form failed",a,b);m.innerHTML='Could not send. Please email <a href="mailto:abidhkareem@gmail.com" style="color:#fff">abidhkareem@gmail.com</a>.'+dbg.replace(/<(?!\/?(br|small|a)\b)/g,"&lt;")}
+sb.disabled=false;setTimeout(()=>{if(!DBG)m.textContent=""},8000)});
 </script>
 </body>
 </html>
