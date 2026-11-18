@@ -293,6 +293,7 @@ footer{background:#1d141b;color:#9d909a;font-size:14px;padding:18px 0;text-align
 <input type="text" name="Name" placeholder="Your name" aria-label="Your name" required>
 <input type="email" name="Email" placeholder="Your email" aria-label="Your email" required>
 <textarea name="Message" rows="5" placeholder="Your message" aria-label="Your message"></textarea>
+<input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
 <button type="submit" class="btn">Send message</button>
 <span id="msg" role="status"></span>
 </form>
@@ -368,13 +369,17 @@ addEventListener("scroll",()=>{if(!tk){tk=true;requestAnimationFrame(pick)}},{pa
 jobs.forEach(j=>j.addEventListener("mouseenter",()=>{if(matchMedia("(hover:hover)").matches)setActive(j)}));
 ex.addEventListener("mouseleave",pick);pick();
 coSync();
-const f=document.forms["submit-to-google-sheet"],m=document.getElementById("msg"),sb=f.querySelector("button"),URL_="https://script.google.com/macros/s/AKfycbznowXGyTSuRrYoOT4UcFgDMkAHmpmVorTnlW1FsNdMaJoVQ8ey-JEnInYVFiZ1vU1Z/exec";
+const f=document.forms["submit-to-google-sheet"],m=document.getElementById("msg"),sb=f.querySelector("button"),MAIL="abidhkareem@gmail.com",SHEET="https://script.google.com/macros/s/AKfycbznowXGyTSuRrYoOT4UcFgDMkAHmpmVorTnlW1FsNdMaJoVQ8ey-JEnInYVFiZ1vU1Z/exec",DBG=/[?&]debug/.test(location.search);
 f.addEventListener("submit",async e=>{e.preventDefault();sb.disabled=true;m.textContent="Sending...";
-try{const r=await fetch(URL_,{method:"POST",body:new FormData(f)}),t=await r.text();let ok=r.ok;try{ok=JSON.parse(t).result==="success"}catch(_){}
-if(!ok)throw new Error("Server said: "+t.slice(0,300));
+const d=Object.fromEntries(new FormData(f)),log=new FormData(f);
+try{const r=await fetch("https://formsubmit.co/ajax/"+MAIL,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({name:d.Name,email:d.Email,message:d.Message,_subject:"New message from abidhkareem.github.io",_replyto:d.Email,_template:"table",_honey:d._honey||""})});
+const t=await r.text();let j=null;try{j=JSON.parse(t)}catch(_){}
+const refused=j&&String(j.success)==="false"&&!/activ/i.test(j.message||"");
+if(!r.ok||!j||refused)throw new Error("HTTP "+r.status+" - "+t.slice(0,200));
+try{fetch(SHEET,{method:"POST",mode:"no-cors",body:log})}catch(_){}
 m.textContent="Message sent. Thank you.";f.reset()}
-catch(err){console.error("Contact form error:",err);m.innerHTML='Could not send. Please email <a href="mailto:abidhkareem@gmail.com" style="color:#fff">abidhkareem@gmail.com</a>.'}
-finally{sb.disabled=false;setTimeout(()=>m.textContent="",8000)}});
+catch(err){console.error("Contact form error:",err);m.innerHTML='Could not send. Please email <a href="mailto:abidhkareem@gmail.com" style="color:#fff">abidhkareem@gmail.com</a>.'+(DBG?'<br><small>Debug: '+String(err.message).replace(/</g,"&lt;")+'</small>':"")}
+finally{sb.disabled=false;setTimeout(()=>{if(!DBG)m.textContent=""},8000)}});
 </script>
 </body>
 </html>
